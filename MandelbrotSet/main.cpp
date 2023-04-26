@@ -1,9 +1,4 @@
-#include <sstream>
-#include <SFML/Graphics.hpp>
-#include <cstdlib>
-#include <ctime>
-#include <complex>
-#include <iostream>
+#include "complexPlane.cpp"
 
 // Make code easier to type with "using namespace"
 using namespace sf;
