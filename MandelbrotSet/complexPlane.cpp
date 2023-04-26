@@ -65,7 +65,7 @@ void ComplexPlane::loadText(Text& text)
 	Center: (0,0)
 	Cursor: (-1.05313, 0.828125)
 	Left-click to Zoom in
-	Right-click ot Zoom out*/
+	Right-click to Zoom out*/
 
 }
 
