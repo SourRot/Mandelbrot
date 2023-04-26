@@ -7,6 +7,11 @@ ComplexPlane::ComplexPlane(float aspectRatio)
 	Negative size for the height will invert the vertical axis
 	setCenter of the m_view variable to 0.0, 0.0
 	Set m_zoomCount to 0*/
+	m_aspectRatio = aspectRatio;
+	m_view.setSize(Vector2f(BASE_WIDTH, -BASE_HEIGHT * m_aspectRatio));
+	m_view.setCenter(Vector2f(0.f, 0.f));
+	m_zoomCount = 0;
+
 }
 
 void ComplexPlane::zoomIn()
@@ -40,4 +45,14 @@ void ComplexPlane::loadText(Text& text)
 	Cursor: (-1.05313, 0.828125)
 	Left-click to Zoom in
 	Right-click ot Zoom out*/
+}
+
+size_t ComplexPlane::countIterations(vector<Vector2f> coord)
+{
+
+}
+
+void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& nb)
+{
+
 }
