@@ -46,13 +46,15 @@ void ComplexPlane::zoomOut()
 
 void ComplexPlane::setCenter(Vector2f coord)
 {
-	/*setCenter for m_view to the given coordinate*/
+	/*setCenter for m_view to the given coordinate
+		DONE*/
 	m_view.setCenter(coord.x, coord.y);
 }
 
 void ComplexPlane::setMouseLocation(Vector2f coord)
 {
-	/*Store the given value in the m_mouseLocation variable*/
+	/*Store the given value in the m_mouseLocation variable
+		DONE*/
 	m_mouseLocation = coord;
 }
 
@@ -64,6 +66,7 @@ void ComplexPlane::loadText(Text& text)
 	Cursor: (-1.05313, 0.828125)
 	Left-click to Zoom in
 	Right-click ot Zoom out*/
+
 }
 
 size_t ComplexPlane::countIterations(Vector2f coord)
