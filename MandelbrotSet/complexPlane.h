@@ -6,6 +6,9 @@
 #include <complex>
 #include <iostream>
 
+using namespace sf;
+using namespace std;
+
 class ComplexPlane
 {
 public:

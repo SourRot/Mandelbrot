@@ -22,12 +22,12 @@ void ComplexPlane::zoomOut()
 	/*Same as zoomIn, just decrement m_zoomCount instead of incrementing it*/
 }
 
-void ComplexPlane::setCenter(vector<Vector2F> coord)
+void ComplexPlane::setCenter(vector<Vector2f> coord)
 {
 	/*setCenter for m_view to the given coordinate*/
 }
 
-void ComplexPlane::setMouseLocation(vector<Vector2F> coord)
+void ComplexPlane::setMouseLocation(vector<Vector2f> coord)
 {
 	/*Store the given value in the m_mouseLocation variable*/
 }
