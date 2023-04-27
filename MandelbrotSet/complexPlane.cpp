@@ -72,9 +72,9 @@ void ComplexPlane::loadText(Text& text)
 	text.setFont(font);
 	text.setCharacterSize(30);
 	ss << "Mandelbrot Set" << '\n'
-		<< "Cursor: " << m_mouseLocation	//Not sure why this doesn't work
+		<< "Cursor: " << m_mouseLocation.x << ", " << m_mouseLocation.y	//Not sure why this doesn't work ********* possibly fixed?
 		<< '\n' << "Left-click to Zoom in" << '\n'
-		<< "Left-click to Zoom out";
+		<< "Right-click to Zoom out";
 	
 
 }
