@@ -51,60 +51,60 @@ vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvDONEvvvvvvvvvvvvvvvvvv
 				Setting the ComplexPlane's view before drawing would force the engine to map from the complex plane float coordinates to pixels, but we already did that when we calculated the iterations and loaded the VertexArray, so it's not necessary
 
 
+
+
+
+// Unsure if more needs to be tweaked on these, functions need to be finished to see
+		Handle Input segment
+				Poll Windows queue events
+
+				Handle Event::Closed event to close the window
+
+				Handle Event::MouseButtonPressed
+					Use mapPixelToCoords to find the Vector2f coordinate in the ComplexPlane View that corresponds to the screen mouse click
+					Right click will zoomOut and setCenter of the ComplexPlane object
+					Left click will zoomIn and setCenter of the ComplexPlane object
+					Set the state to CALCULATING to generate the new complex plane view in the update segment
+
+
+				Handle Event::MouseMoved
+					Use mapPixelToCoords to find the Vector2f coordinate in the ComplexPlane View that corresponds to the screen mouse location
+					setMouseLocation on the ComplexPlane object to store this coordinate
+					This will be used later to display the mouse coordinates as it moves
+
+				Check if Keyboard::isKeyPressed(Keyboard::Escape) to close the window
+
+		// This one is the hard part
+		Update Scene segment
+			If the state is CALCULATING
+				Double for loop to loop through all pixels in the screen height and width
+
+					Use j for x and i for y
+
+					Set the position variable in the element of VertexArray that corresponds to the screen coordinate j,i
+					This is difficult, so study the line of code below:
+						vArray[j + i * pixelWidth].position = { (float)j,(float)i };
+
+					Use mapPixelToCoords to find the Vector2f coordinate in the ComplexPlane View that corresponds to the screen pixel location at j,i
+
+					Call ComplexPlane::countIterations for the Vector2f coordinate in the ComplexPlane and store the number of iterations
+
+					Declare three local Uint8 variables r,g,b to store the RGB values for the current pixel
+						Uint8 is an alias for unsigned char
+
+					Pass the number of iterations and the RGB variables into ComplexPlane::iterationsToRGB
+						This will assign the RGB values by reference
+
+					Set the color variable in the element of VertexArray that corresponds to the screen coordinate j,i
+						vArray[j + i * pixelWidth].color = { r,g,b };
+
+			Set the state to DISPLAYING
+			Call loadText from the ComplexPlane object
+
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^DONE^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-// Unsure if more needs to be tweaked on this
-	Handle Input segment
-			Poll Windows queue events
-
-			Handle Event::Closed event to close the window
-
-			Handle Event::MouseButtonPressed
-				Use mapPixelToCoords to find the Vector2f coordinate in the ComplexPlane View that corresponds to the screen mouse click
-				Right click will zoomOut and setCenter of the ComplexPlane object
-				Left click will zoomIn and setCenter of the ComplexPlane object
-				Set the state to CALCULATING to generate the new complex plane view in the update segment
-
-
-			Handle Event::MouseMoved
-				Use mapPixelToCoords to find the Vector2f coordinate in the ComplexPlane View that corresponds to the screen mouse location
-				setMouseLocation on the ComplexPlane object to store this coordinate
-				This will be used later to display the mouse coordinates as it moves
-
-			Check if Keyboard::isKeyPressed(Keyboard::Escape) to close the window
-
 ********************************************************IN PROGRESS********************************************************
-
-
-
-
-// This one is the hard part
-	Update Scene segment
-		If the state is CALCULATING
-			Double for loop to loop through all pixels in the screen height and width
-
-				Use j for x and i for y
-
-				Set the position variable in the element of VertexArray that corresponds to the screen coordinate j,i
-				This is difficult, so study the line of code below:
-					vArray[j + i * pixelWidth].position = { (float)j,(float)i };
-
-				Use mapPixelToCoords to find the Vector2f coordinate in the ComplexPlane View that corresponds to the screen pixel location at j,i
-
-				Call ComplexPlane::countIterations for the Vector2f coordinate in the ComplexPlane and store the number of iterations
-
-				Declare three local Uint8 variables r,g,b to store the RGB values for the current pixel
-					Uint8 is an alias for unsigned char
-
-				Pass the number of iterations and the RGB variables into ComplexPlane::iterationsToRGB
-					This will assign the RGB values by reference
-
-				Set the color variable in the element of VertexArray that corresponds to the screen coordinate j,i
-					vArray[j + i * pixelWidth].color = { r,g,b };
-
-		Set the state to DISPLAYING
-		Call loadText from the ComplexPlane object
 
 
 		
@@ -138,9 +138,9 @@ int main()
 		ComplexPlane plane(aspectRatio);
 
 		// Our VertexArray
-		VertexArray backround;
-		backround.setPrimitiveType(Points);
-		backround.resize(width * height);
+		VertexArray background;
+		background.setPrimitiveType(Points);
+		background.resize(width * height);
 		const int pixelWidth = 3;
 		// Loading font
 		Text messageText;
@@ -214,48 +214,40 @@ int main()
 		// If the state is CALCULATING
 		if (current == State::CALCULATING)
 		{
-			/*
-				Double for loop to loop through all pixels in the screen height and width
+			size_t iterations = 0;
 
-					Use j for x and i for y
-
-					Set the position variable in the element of VertexArray that corresponds to the screen coordinate j, i
-					This is difficult, so study the line of code below :
-						vArray[j + i * pixelWidth].position = { (float)j,(float)i };
-
-					Use mapPixelToCoords to find the Vector2f coordinate in the ComplexPlane View that corresponds to the screen pixel location at j, i
-
-					Call ComplexPlane::countIterations for the Vector2f coordinate in the ComplexPlane and store the number of iterations
-
-					Declare three local Uint8 variables r, g, b to store the RGB values for the current pixel
-					Uint8 is an alias for unsigned char
-
-					Pass the number of iterations and the RGB variables into ComplexPlane::iterationsToRGB
-					This will assign the RGB values by reference
-
-					Set the color variable in the element of VertexArray that corresponds to the screen coordinate j, i
-					vArray[j + i * pixelWidth].color = { r,g,b };
-			*/
-
-			for (int j = 0; j < height; j++)
+			for (int j = 0; j < width; j++)
 			{
-				for (int i = 0; i < width; i++)
+				for (int i = 0; i < height; i++)
 				{
 
-					backround[j + i * pixelWidth].position = { (float)j,(float)i };
-					auto mouse_pos = Mouse::getPosition(window);
-					auto translated_pos = window.mapPixelToCoords(mouse_pos);
+					background[j + i * pixelWidth].position = { (float)j,(float)i };
+					
+					Vector2i pixels;
+					pixels.x = j;
+					pixels.y = i;
+					auto pixel_pos = window.mapPixelToCoords(pixels);
+
+					iterations = plane.countIterations(pixel_pos);
 					
 
+					Uint8 r = 0;
+					Uint8 g = 0;
+					Uint8 b = 0;
 
-					Uint8 r = ;
-					Uint8 g = ;
-					Uint8 b = ;
+
+					plane.iterationsToRGB(iterations, r, g, b);
+
+					background[j + i * pixelWidth].color.r = r;
+					background[j + i * pixelWidth].color.g = g;
+					background[j + i * pixelWidth].color.b = b;
+
 				}
 			}
 		}
 		// 	Set the state to DISPLAYING
 			current = State::DISPLAYING;
+
 		// Call loadText from the ComplexPlane object
 			plane.loadText(messageText);
 
@@ -265,7 +257,7 @@ int main()
 			window.clear();
 
 			//Draw the VertexArray
-			window.draw(backround);
+			window.draw(background);
 
 			// Basic message text
 			window.draw(messageText);

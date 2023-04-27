@@ -103,17 +103,19 @@ size_t ComplexPlane::countIterations(Vector2f coord)
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& nb)
 {
-	/*Map the given iteration count to an r,g,b color and assign the given reference variables
-	You are free to create and experiment with your own color scheme
-	You may want to start with gray scale, where r,g,b are always the same value in the range [0,255]
-	I used the following strategy:
-	At MAX_ITER I colored the pixel black {0,0,0}
-	Between [0 : MAX_ITER) I divided the colors into 5 regions:
-	Purple / blue for low iteration counts
-	Turquoise
-	Green
-	Yellow
-	Red for high iteration counts
-	You can experiment with HSV color mapping to see which values to assign for each region
-	Set S to 100% and V to 50% and slide the H*/
+	/*
+		Map the given iteration count to an r,g,b color and assign the given reference variables
+		You are free to create and experiment with your own color scheme
+		You may want to start with gray scale, where r,g,b are always the same value in the range [0,255]
+		I used the following strategy:
+		At MAX_ITER I colored the pixel black {0,0,0}
+		Between [0 : MAX_ITER) I divided the colors into 5 regions:
+		Purple / blue for low iteration counts
+		Turquoise
+		Green
+		Yellow
+		Red for high iteration counts
+		You can experiment with HSV color mapping to see which values to assign for each region
+		Set S to 100% and V to 50% and slide the H
+	*/
 }
