@@ -18,8 +18,6 @@ int main()
 	RenderWindow window(vm, "Mandel-What???", Style::Default);	//Window name is placeholder, feel free to change
 
 	// Loading font
-	Font font;
-	font.loadFromFile("./Kanit-Thin.ttf");
 	Text messageText;
 
 	// Set font and font size
