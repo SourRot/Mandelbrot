@@ -1,5 +1,7 @@
 #include "complexPlane.cpp"
 
+// PARTNERS: Tareq Anwaryar, Rachael Greer
+
 // Make code easier to type with "using namespace"
 
 // I put the instructions and organized it to be readable
@@ -73,14 +75,7 @@ vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvDONEvvvvvvvvvvvvvvvvvv
 					This will be used later to display the mouse coordinates as it moves
 
 				Check if Keyboard::isKeyPressed(Keyboard::Escape) to close the window
-
-
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^DONE^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-********************************************************IN PROGRESS********************************************************
-			// This one is the hard part
+							// This one is the hard part
 		Update Scene segment
 			If the state is CALCULATING
 				Double for loop to loop through all pixels in the screen height and width
@@ -107,10 +102,9 @@ vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvDONEvvvvvvvvvvvvvvvvvv
 			Set the state to DISPLAYING
 			Call loadText from the ComplexPlane object
 
-		
 
-********************************************************IN PROGRESS********************************************************
 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^DONE^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 */
