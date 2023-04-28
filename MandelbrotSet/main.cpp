@@ -193,7 +193,6 @@ int main()
 					plane.setCenter(translated_pos);
 				}
 				current = State::CALCULATING;
-				
 
 			}
 
@@ -247,11 +246,17 @@ int main()
 
 				}
 			}
-		}
-		// 	Set the state to DISPLAYING
 			current = State::DISPLAYING;
+		}
+		else // Draw Scene Segment
+		{
 
 
+			// Clear everything from the last frame
+			window.clear();
+
+
+			//
 			if (current == State::DISPLAYING)
 			{
 				for (int j = 0; j < width; j++)
@@ -264,23 +269,20 @@ int main()
 					}
 				}
 			}
-		// Call loadText from the ComplexPlane object
-			plane.loadText(messageText);
-
-		// Draw Scene Segment
-
-			// Clear everything from the last frame
-			window.clear();
-
 			//Draw the VertexArray
 			window.draw(background);
 
+			// Call loadText from the ComplexPlane object
+			plane.loadText(messageText);
 			// Basic message text
 			window.draw(messageText);
 
 
 			// Show everything we just drew
 			window.display();
+
+		}
+
 
 	}
 
