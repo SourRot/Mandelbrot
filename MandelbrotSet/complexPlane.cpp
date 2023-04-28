@@ -72,6 +72,7 @@ void ComplexPlane::loadText(Text& text)
 	Left-click to Zoom in
 	Right-click to Zoom out*/
 	stringstream ss;
+
 	ss << "Mandelbrot Set" << '\n'
 		<< "Cursor: (" << m_mouseLocation.x << ", " << m_mouseLocation.y << ")"	//Not sure why this doesn't work ********* possibly fixed?
 		<< '\n' << "Left-click to Zoom in" << '\n'
@@ -132,31 +133,58 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 		You may want to start with gray scale, where r,g,b are always the same value in the range [0,255]
 		I used the following strategy:
 		At MAX_ITER I colored the pixel black {0,0,0}
+
+
 		Between [0 : MAX_ITER) I divided the colors into 5 regions:
 		Purple / blue for low iteration counts
 		Turquoise
 		Green
 		Yellow
 		Red for high iteration counts
+
+
 		You can experiment with HSV color mapping to see which values to assign for each region
 		Set S to 100% and V to 50% and slide the H
 	*/
 
 	if (count != MAX_ITER)
 	{
-		r = count * 255 / MAX_ITER;
-		g = count * 255 / MAX_ITER;
-		b = count * 255 / MAX_ITER;
+		if (count > 0 && count < 50)
+		{ 
+			r = count * 91 / MAX_ITER;
+			g = count * 23 / MAX_ITER;
+			b = count * 41/ MAX_ITER;
+		}
+		else if (count >= 50 && count < 100)
+		{
+			r = count * 131 / MAX_ITER;
+			g = count * 105 / MAX_ITER;
+			b = count * 105 / MAX_ITER;
+		}
+		else if (count >= 100 && count < 150)
+		{
+			r = count * 204 / MAX_ITER;
+			g = count * 108 / MAX_ITER;
+			b = count * 94 / MAX_ITER;
+		}
+		else if (count >= 150 && count < 200)
+		{
+			r = count * 230 / MAX_ITER;
+			g = count * 159 / MAX_ITER;
+			b = count * 150 / MAX_ITER;
+		}
+		else if (count >= 200 && count < 256)
+		{
+			r = count * 255 / MAX_ITER;
+			g = count * 255 / MAX_ITER;
+			b = count * 255 / MAX_ITER;
+		}
 	}
 	else
 	{
-		r = 255;
-		g = 40;
-		b = 30;
+		r = 0;
+		g = 0;
+		b = 0;
 	}
-
-	//r = 255;
-	//g = 40;
-	//b = 30;
 
 }

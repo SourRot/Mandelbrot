@@ -125,7 +125,7 @@ int main()
 		// Values for desktop scaling
 		float width = VideoMode::getDesktopMode().width;
 		float height = VideoMode::getDesktopMode().height;
-		float aspectRatio = width / height;
+		float aspectRatio = height / width;
 
 		//	View view(FloatRect(0.f, 0.f, width, height)); // Instructions say view might not be necessary
 		VideoMode vm(width, height);
