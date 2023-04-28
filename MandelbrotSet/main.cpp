@@ -138,7 +138,8 @@ int main()
 		ComplexPlane plane(aspectRatio);
 
 		// Our VertexArray
-		VertexArray background;
+		//VertexArray background;
+		VertexArray background(Points);
 		background.setPrimitiveType(Points);
 		background.resize(width * height);
 
@@ -248,6 +249,10 @@ int main()
 		//window.setView(plane.getView());
 
 		// Call loadText from the ComplexPlane object
+		plane.loadText(messageText);
+
+		messageText.setPosition(0.0f, 0.0f);
+
 		//plane.loadText(messageText);
 		window.clear();
 
