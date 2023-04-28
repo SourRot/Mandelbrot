@@ -146,8 +146,21 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 		Set S to 100% and V to 50% and slide the H
 	*/
 
-	r = 255;
+	if (count != MAX_ITER)
+	{
+		r = count * 255 / MAX_ITER;
+		g = count * 255 / MAX_ITER;
+		b = count * 255 / MAX_ITER;
+	}
+	else
+	{
+		r = 255;
+		g = 255;
+		b = 255;
+	}
+
+	/*r = 255;
 	g = 40;
-	b = 30;
+	b = 30;*/
 
 }
