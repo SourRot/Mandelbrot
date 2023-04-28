@@ -105,7 +105,7 @@ vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvDONEvvvvvvvvvvvvvvvvvv
 
 
 ********************************************************IN PROGRESS********************************************************
-
+	// Need to create a shape used to draw
 
 		
 
@@ -132,7 +132,7 @@ int main()
 
 
 		// Create and open a window for the game
-		RenderWindow window(vm, "Mandel-What???", Style::Default);	//Window name is placeholder, feel free to change
+		RenderWindow window(vm, "Mandel-What???", Style::Default);	//Window name is placeholder, feel free to change - no I love it
 
 		// Our ComplexPlane
 		ComplexPlane plane(aspectRatio);
@@ -141,7 +141,7 @@ int main()
 		VertexArray background;
 		background.setPrimitiveType(Points);
 		background.resize(width * height);
-		const int pixelWidth = 3;
+		const int pixelWidth = 1;
 		// Loading font
 		Text messageText;
 
@@ -154,6 +154,9 @@ int main()
 		// Setting the texture of the sprite and scaling it to our window
 		Vector2u TextureSize;  // Added to store texture size.
 		Vector2u WindowSize;   // Added to store window size.
+
+		// Shape that we are drawing with
+		CircleShape point(1.0f);
 
 		enum class State
 		{
@@ -248,6 +251,19 @@ int main()
 		// 	Set the state to DISPLAYING
 			current = State::DISPLAYING;
 
+
+			if (current == State::DISPLAYING)
+			{
+				for (int j = 0; j < width; j++)
+				{
+					for (int i = 0; i < height; i++)
+					{
+						point.setPosition(j, i * pixelWidth);
+						point.setFillColor(background[j + i * pixelWidth].color);
+						window.draw(point);
+					}
+				}
+			}
 		// Call loadText from the ComplexPlane object
 			plane.loadText(messageText);
 
