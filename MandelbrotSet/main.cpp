@@ -138,10 +138,11 @@ int main()
 		ComplexPlane plane(aspectRatio);
 
 		// Our VertexArray
-		VertexArray background;
+		//VertexArray background;
+		VertexArray background(Points);
 		background.setPrimitiveType(Points);
 		background.resize(width * height);
-		const int pixelWidth = 1;
+		const float pixelWidth = width;
 
 		// Loading font
 		Font font;
@@ -225,7 +226,7 @@ int main()
 					Vector2i pixels;
 					pixels.x = j;
 					pixels.y = i;
-					auto pixel_pos = window.mapPixelToCoords(pixels, plane.getView());
+					auto pixel_pos = window.mapPixelToCoords(pixels);
 
 					iterations = plane.countIterations(pixel_pos);
 					
@@ -262,14 +263,16 @@ int main()
 		}
 
 		// Call loadText from the ComplexPlane object
-		//plane.loadText(messageText);
+		plane.loadText(messageText);
+
+		messageText.setPosition(0.0f, 0.0f);
 
 		window.clear();
 
 		window.draw(background);
 
 		// Basic message text
-		//window.draw(messageText);
+		window.draw(messageText);
 
 		window.display();
 

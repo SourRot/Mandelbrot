@@ -13,7 +13,7 @@ ComplexPlane::ComplexPlane(float aspectRatio)
 		DONE*/
 	m_aspectRatio = aspectRatio;
 	m_view.setSize(Vector2f(BASE_WIDTH, -BASE_HEIGHT * m_aspectRatio));
-	m_view.setCenter(Vector2f(0.f, 0.f));
+	m_view.setCenter(Vector2f(0.0f, 0.0f));
 	m_zoomCount = 0;
 
 }
@@ -72,10 +72,6 @@ void ComplexPlane::loadText(Text& text)
 	Left-click to Zoom in
 	Right-click to Zoom out*/
 	stringstream ss;
-	Font font;
-	font.loadFromFile("./Kanit-Thin.ttf");
-	text.setFont(font);
-	text.setCharacterSize(30);
 	ss << "Mandelbrot Set" << '\n'
 		<< "Cursor: (" << m_mouseLocation.x << ", " << m_mouseLocation.y << ")"	//Not sure why this doesn't work ********* possibly fixed?
 		<< '\n' << "Left-click to Zoom in" << '\n'
@@ -155,12 +151,12 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 	else
 	{
 		r = 255;
-		g = 255;
-		b = 255;
+		g = 40;
+		b = 30;
 	}
 
-	/*r = 255;
-	g = 40;
-	b = 30;*/
+	//r = 255;
+	//g = 40;
+	//b = 30;
 
 }
