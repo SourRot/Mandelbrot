@@ -72,8 +72,10 @@ void ComplexPlane::loadText(Text& text)
 	Left-click to Zoom in
 	Right-click to Zoom out*/
 	stringstream ss;
+	
 
 	ss << "Mandelbrot Set" << '\n'
+		<< "Center: (" << m_view.getCenter().x << ", " << m_view.getCenter().y << ")" << '\n'
 		<< "Cursor: (" << m_mouseLocation.x << ", " << m_mouseLocation.y << ")"	//Not sure why this doesn't work ********* possibly fixed?
 		<< '\n' << "Left-click to Zoom in" << '\n'
 		<< "Right-click to Zoom out";
