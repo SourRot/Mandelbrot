@@ -141,7 +141,6 @@ int main()
 		VertexArray background;
 		background.setPrimitiveType(Points);
 		background.resize(width * height);
-		const int pixelWidth = 1;
 
 		// Loading font
 		Font font;
@@ -151,9 +150,7 @@ int main()
 		// Set font and font size
 		messageText.setFont(font);
 		messageText.setCharacterSize(44);
-
-		// Shape that we are drawing with
-		CircleShape point(1.0f);
+		messageText.setColor(Color::Cyan);
 
 		enum state
 		{
@@ -177,26 +174,28 @@ int main()
 			if (event.type == Event::MouseButtonPressed)
 			{
 				auto mouse_pos = Mouse::getPosition(window);
-				auto translated_pos = window.mapPixelToCoords(mouse_pos);
+				auto translated_pos = window.mapPixelToCoords(mouse_pos, plane.getView());
 
 				if (event.mouseButton.button == Mouse::Left)
 				{
 					plane.zoomIn();
 					plane.setCenter(translated_pos);
+					current = CALCULATING;
 				}
 				else if (event.mouseButton.button == Mouse::Right)
 				{
 					plane.zoomOut();
 					plane.setCenter(translated_pos);
+					current = CALCULATING;
 				}
-				current = CALCULATING;
+				
 
 			}
 
 			if (event.type == Event::MouseMoved)
 			{
 				auto mouse_pos = Mouse::getPosition(window);
-				auto translated_pos = window.mapPixelToCoords(mouse_pos);
+				auto translated_pos = window.mapPixelToCoords(mouse_pos, plane.getView());
 				plane.setMouseLocation(translated_pos);
 			}
 		
@@ -206,7 +205,6 @@ int main()
 		{
 			window.close();
 		}
-
 
 		// Update Scene segment
 
@@ -220,16 +218,18 @@ int main()
 				for (int i = 0; i < height; i++)
 				{
 
-					background[j + i * pixelWidth].position = { (float)j,(float)i };
+					background[j + i * width].position = { float(j),float(i) };
 					
 					Vector2i pixels;
 					pixels.x = j;
 					pixels.y = i;
-					auto pixel_pos = window.mapPixelToCoords(pixels, plane.getView());
+
+					Vector2f pixel_pos = window.mapPixelToCoords(pixels, plane.getView());
 
 					iterations = plane.countIterations(pixel_pos);
+				
+					// Use mapPixelToCoords to find the Vector2f coordinate in the ComplexPlane View that corresponds to the screen pixel location at j, i
 					
-
 					Uint8 r = 0;
 					Uint8 g = 0;
 					Uint8 b = 0;
@@ -237,39 +237,24 @@ int main()
 
 					plane.iterationsToRGB(iterations, r, g, b);
 
-					background[j + i * pixelWidth].color.r = r;
-					background[j + i * pixelWidth].color.g = g;
-					background[j + i * pixelWidth].color.b = b;
+					background[j + i * width].color = { r, g, b };
 
 				}
 			}
 			current = DISPLAYING;
-		}
 
-		window.setView(plane.getView());
-
-		if (current == DISPLAYING)
-		{
-			for (int j = 0; j < width; j++)
-			{
-				for (int i = 0; i < height; i++)
-				{
-					point.setPosition(j, i * pixelWidth);
-					point.setFillColor(background[j + i * pixelWidth].color);
-					window.draw(point);
-				}
-			}
 		}
+		
+		//window.setView(plane.getView());
 
 		// Call loadText from the ComplexPlane object
 		//plane.loadText(messageText);
-
 		window.clear();
 
 		window.draw(background);
 
 		// Basic message text
-		//window.draw(messageText);
+		window.draw(messageText);
 
 		window.display();
 

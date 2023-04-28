@@ -73,9 +73,7 @@ void ComplexPlane::loadText(Text& text)
 	Right-click to Zoom out*/
 	stringstream ss;
 	Font font;
-	font.loadFromFile("./Kanit-Thin.ttf");
-	text.setFont(font);
-	text.setCharacterSize(30);
+
 	ss << "Mandelbrot Set" << '\n'
 		<< "Cursor: (" << m_mouseLocation.x << ", " << m_mouseLocation.y << ")"	//Not sure why this doesn't work ********* possibly fixed?
 		<< '\n' << "Left-click to Zoom in" << '\n'
