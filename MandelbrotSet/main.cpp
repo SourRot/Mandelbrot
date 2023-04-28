@@ -142,18 +142,15 @@ int main()
 		background.setPrimitiveType(Points);
 		background.resize(width * height);
 		const int pixelWidth = 1;
+
 		// Loading font
+		Font font;
+		font.loadFromFile("./Kanit-Thin.ttf");
 		Text messageText;
 
 		// Set font and font size
-		Font font;
-		font.loadFromFile("./Kanit-Thin.ttf");
 		messageText.setFont(font);
 		messageText.setCharacterSize(44);
-
-		// Setting the texture of the sprite and scaling it to our window
-		Vector2u TextureSize;  // Added to store texture size.
-		Vector2u WindowSize;   // Added to store window size.
 
 		// Shape that we are drawing with
 		CircleShape point(1.0f);
@@ -228,7 +225,7 @@ int main()
 					Vector2i pixels;
 					pixels.x = j;
 					pixels.y = i;
-					auto pixel_pos = window.mapPixelToCoords(pixels);
+					auto pixel_pos = window.mapPixelToCoords(pixels, plane.getView());
 
 					iterations = plane.countIterations(pixel_pos);
 					
@@ -249,31 +246,32 @@ int main()
 			current = DISPLAYING;
 		}
 
-			if (current == DISPLAYING)
+		window.setView(plane.getView());
+
+		if (current == DISPLAYING)
+		{
+			for (int j = 0; j < width; j++)
 			{
-				for (int j = 0; j < width; j++)
+				for (int i = 0; i < height; i++)
 				{
-					for (int i = 0; i < height; i++)
-					{
-						point.setPosition(j, i * pixelWidth);
-						point.setFillColor(background[j + i * pixelWidth].color);
-						window.draw(point);
-					}
+					point.setPosition(j, i * pixelWidth);
+					point.setFillColor(background[j + i * pixelWidth].color);
+					window.draw(point);
 				}
 			}
+		}
 
+		// Call loadText from the ComplexPlane object
+		//plane.loadText(messageText);
 
+		window.clear();
 
-			window.clear();
+		window.draw(background);
 
-			window.draw(background);
+		// Basic message text
+		//window.draw(messageText);
 
-			// Call loadText from the ComplexPlane object
-			plane.loadText(messageText);
-			// Basic message text
-			window.draw(messageText);
-
-			window.display();
+		window.display();
 
 
 
