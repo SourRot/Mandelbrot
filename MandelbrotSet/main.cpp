@@ -74,7 +74,13 @@ vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvDONEvvvvvvvvvvvvvvvvvv
 
 				Check if Keyboard::isKeyPressed(Keyboard::Escape) to close the window
 
-		// This one is the hard part
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^DONE^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+********************************************************IN PROGRESS********************************************************
+			// This one is the hard part
 		Update Scene segment
 			If the state is CALCULATING
 				Double for loop to loop through all pixels in the screen height and width
@@ -100,12 +106,6 @@ vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvDONEvvvvvvvvvvvvvvvvvv
 
 			Set the state to DISPLAYING
 			Call loadText from the ComplexPlane object
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^DONE^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-********************************************************IN PROGRESS********************************************************
-	// Need to create a shape used to draw
 
 		
 
@@ -158,12 +158,12 @@ int main()
 		// Shape that we are drawing with
 		CircleShape point(1.0f);
 
-		enum class State
+		enum state
 		{
 			CALCULATING, DISPLAYING
 		};
 
-		State current = State::CALCULATING;
+		state current = CALCULATING;
 
 	while (window.isOpen())
 	{
@@ -192,7 +192,7 @@ int main()
 					plane.zoomOut();
 					plane.setCenter(translated_pos);
 				}
-				current = State::CALCULATING;
+				current = CALCULATING;
 
 			}
 
@@ -214,7 +214,7 @@ int main()
 		// Update Scene segment
 
 		// If the state is CALCULATING
-		if (current == State::CALCULATING)
+		if (current == CALCULATING)
 		{
 			size_t iterations = 0;
 
@@ -246,18 +246,10 @@ int main()
 
 				}
 			}
-			current = State::DISPLAYING;
+			current = DISPLAYING;
 		}
-		else // Draw Scene Segment
-		{
 
-
-			// Clear everything from the last frame
-			window.clear();
-
-
-			//
-			if (current == State::DISPLAYING)
+			if (current == DISPLAYING)
 			{
 				for (int j = 0; j < width; j++)
 				{
@@ -269,7 +261,11 @@ int main()
 					}
 				}
 			}
-			//Draw the VertexArray
+
+
+
+			window.clear();
+
 			window.draw(background);
 
 			// Call loadText from the ComplexPlane object
@@ -277,11 +273,8 @@ int main()
 			// Basic message text
 			window.draw(messageText);
 
-
-			// Show everything we just drew
 			window.display();
 
-		}
 
 
 	}
