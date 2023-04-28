@@ -15,15 +15,15 @@ using namespace std;
 class ComplexPlane
 {
 public:
-	ComplexPlane(float aspectRatio);
-	void zoomIn();
-	void zoomOut();
-	void setCenter(Vector2f coord);
-	View getView();
-	void setMouseLocation(Vector2f coord);
-	void loadText(Text& text);
-	size_t countIterations(Vector2f coord);
-	void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b);
+	inline ComplexPlane(float aspectRatio);
+	inline void zoomIn();
+	inline void zoomOut();
+	inline void setCenter(Vector2f coord);
+	inline View getView();
+	inline void setMouseLocation(Vector2f coord);
+	inline void loadText(Text& text);
+	inline size_t countIterations(Vector2f coord);
+	inline void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b);
 private:
 	Vector2f m_mouseLocation;
 	View m_view;
